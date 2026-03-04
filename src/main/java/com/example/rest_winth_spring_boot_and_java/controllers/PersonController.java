@@ -1,64 +1,63 @@
 package com.example.rest_winth_spring_boot_and_java.controllers;
 
-import com.example.rest_winth_spring_boot_and_java.data.dto.v2.PersonDtoV2;
-import com.example.rest_winth_spring_boot_and_java.data.dto.vi.PersonDto;
+import com.example.rest_winth_spring_boot_and_java.controllers.docs.PersonControllerDocs;
+import com.example.rest_winth_spring_boot_and_java.data.dto.PersonDto;
 import com.example.rest_winth_spring_boot_and_java.services.PersonService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/person")
-public class PersonController {
+@RequestMapping("/api/person/v1")
+@Tag(name = "People", description = "endpoints for managing People")
+public class PersonController implements PersonControllerDocs {
     
     @Autowired
     private PersonService service;
-    @GetMapping(value = "/{id}",
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
+    
+    @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @Override
     public PersonDto findById(@PathVariable("id") Long id) {
-        return service.findById(id);
-        
+        var person = service.findById(id);
+        person.setBirthDay(new Date());
+        return person;
     }
     
-    @GetMapping(
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
+    
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE,})
+    @Override
     public List<PersonDto> findAll() {
         return service.findAll();
         
     }
     
-    @PostMapping(
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
-    )
+    
+    @PostMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Override
     public PersonDto create(@RequestBody PersonDto person) {
         return service.create(person);
     }
     
-    @PostMapping(value = "/v2",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    public PersonDtoV2 create(@RequestBody PersonDtoV2 person) {
-        return service.createV2(person);
-    }
     
-    @PutMapping(
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE,}
     )
+    
+    @Override
     public PersonDto update(@RequestBody PersonDto person) {
         return service.update(person);
     }
     
+    
     @DeleteMapping(value = "/{id}")
+    @Override
     public ResponseEntity<?> delete(@PathVariable("id") Long id) {
-        
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

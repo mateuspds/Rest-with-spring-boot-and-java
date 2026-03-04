@@ -1,22 +1,25 @@
-package com.example.rest_winth_spring_boot_and_java.data.dto.v2;
+package com.example.rest_winth_spring_boot_and_java.data.dto;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-
-public class PersonDtoV2 implements Serializable {
+//@JsonPropertyOrder({"id", "meu_nome", "address", "lastName", "gender"})
+public class PersonDto extends RepresentationModel<PersonDto> implements Serializable {
     private static final Long serialVersionUID = 1L;
     
-  
     private Long id;
+   // @JsonProperty("meu_nome")
     private String firstName;
     private String lastName;
     private String address;
+    //@JsonIgnore
     private String gender;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date birthDay;
-    
-    public PersonDtoV2(){}
+    public PersonDto(){}
     
     public String getGender() {
         return gender;
@@ -58,6 +61,7 @@ public class PersonDtoV2 implements Serializable {
         this.id = id;
     }
     
+    
     public Date getBirthDay() {
         return birthDay;
     }
@@ -68,14 +72,11 @@ public class PersonDtoV2 implements Serializable {
     
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof PersonDtoV2 that)) return false;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getFirstName(),
-                that.getFirstName()) && Objects.equals(getLastName(), that.getLastName())
-                && Objects.equals(getAddress(), that.getAddress()) &&
-        Objects.equals(getGender(),
-                that.getGender()) &&
-                Objects.equals(getBirthDay(),
-                        that.getBirthDay());
+        if (!(o instanceof PersonDto personDto)) return false;
+        return Objects.equals(getId(), personDto.getId()) && Objects.equals(getFirstName(),
+                personDto.getFirstName()) && Objects.equals(getLastName(), personDto.getLastName())
+                && Objects.equals(getAddress(), personDto.getAddress()) && Objects.equals(getGender(),
+                personDto.getGender()) && Objects.equals(getBirthDay(), personDto.getBirthDay());
     }
     
     @Override

@@ -1,6 +1,6 @@
-package com.example.rest_winth_spring_boot_and_java.unitetests.mapper.mocks;
+package com.example.rest_winth_spring_boot_and_java.services.mocks;
 
-import com.example.rest_winth_spring_boot_and_java.data.dto.vi.PersonDto;
+import com.example.rest_winth_spring_boot_and_java.data.dto.PersonDto;
 import com.example.rest_winth_spring_boot_and_java.model.Person;
 
 import java.util.ArrayList;
