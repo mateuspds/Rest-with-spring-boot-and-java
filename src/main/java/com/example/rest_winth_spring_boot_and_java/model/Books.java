@@ -1,16 +1,17 @@
 package com.example.rest_winth_spring_boot_and_java.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
-
-public class Books {
+@Table
+@Entity(name = "books")
+public class Books implements Serializable {
     private static final Long serialVersionUID = 1L;
     
     private String author;
-    private String launch_date;
+    private Date launch_date;
     private String title;
     private Double price;
     
@@ -34,11 +35,11 @@ public class Books {
         this.author = author;
     }
     
-    public String getLaunch_date() {
+    public Date getLaunch_date() {
         return launch_date;
     }
     
-    public void setLaunch_date(String launch_date) {
+    public void setLaunch_date(Date launch_date) {
         this.launch_date = launch_date;
     }
     

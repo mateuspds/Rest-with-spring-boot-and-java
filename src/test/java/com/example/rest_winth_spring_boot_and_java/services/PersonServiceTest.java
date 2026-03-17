@@ -1,7 +1,6 @@
 package com.example.rest_winth_spring_boot_and_java.services;
 
 import com.example.rest_winth_spring_boot_and_java.data.dto.PersonDto;
-import com.example.rest_winth_spring_boot_and_java.exception.ResourceNotFoundException;
 import com.example.rest_winth_spring_boot_and_java.exception.hadler.RequiredObjectsNullException;
 import com.example.rest_winth_spring_boot_and_java.model.Person;
 import com.example.rest_winth_spring_boot_and_java.repository.PersonRepository;
@@ -14,16 +13,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
@@ -33,12 +27,10 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class PersonServiceTest {
     MockPerson input;
-    
-    @InjectMocks
-    private PersonService service;
-    
     @Mock
     PersonRepository repository;
+    @InjectMocks
+    private PersonService service;
     
     @BeforeEach
     void setUp() {

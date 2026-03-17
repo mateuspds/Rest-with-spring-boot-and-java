@@ -1,39 +1,37 @@
 package com.example.rest_winth_spring_boot_and_java.controllers;
 
-import com.example.rest_winth_spring_boot_and_java.controllers.docs.PersonControllerDocs;
-import com.example.rest_winth_spring_boot_and_java.data.dto.PersonDto;
-import com.example.rest_winth_spring_boot_and_java.services.PersonService;
+import com.example.rest_winth_spring_boot_and_java.controllers.docs.BookControllerDocs;
+import com.example.rest_winth_spring_boot_and_java.data.dto.BooksDto;
+import com.example.rest_winth_spring_boot_and_java.services.BooksService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/person/v1")
-@Tag(name = "People", description = "endpoints for managing People")
-public class PersonController implements PersonControllerDocs {
+@RequestMapping("/api/books/v1")
+@Tag(name = "Books", description = "endpoints for managing books")
+public class BooksController implements BookControllerDocs {
     
     @Autowired
-    private PersonService service;
+    private BooksService service;
     
     @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE})
     @Override
-    public PersonDto findById(@PathVariable("id") Long id) {
-        var person = service.findById(id);
-        person.setBirthDay(new Date());
-        return person;
+    public BooksDto findById(@PathVariable("id") Long id) {
+        var book = service.findById(id);
+        return book;
     }
     
     
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE,})
     @Override
-    public List<PersonDto> findAll() {
+    public List<BooksDto> findAll() {
         return service.findAll();
         
     }
@@ -42,8 +40,8 @@ public class PersonController implements PersonControllerDocs {
     @PostMapping(produces = {MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE}, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Override
-    public PersonDto create(@RequestBody PersonDto person) {
-        return service.create(person);
+    public BooksDto create(@RequestBody BooksDto book) {
+        return service.create(book);
     }
     
     
@@ -53,8 +51,8 @@ public class PersonController implements PersonControllerDocs {
     )
     
     @Override
-    public PersonDto update(@RequestBody PersonDto person) {
-        return service.update(person);
+    public BooksDto update(@RequestBody BooksDto book) {
+        return service.update(book);
     }
     
     

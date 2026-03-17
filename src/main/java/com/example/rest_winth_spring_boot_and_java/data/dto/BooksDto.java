@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 public class BooksDto extends RepresentationModel<BooksDto> implements Serializable {
@@ -12,7 +13,7 @@ public class BooksDto extends RepresentationModel<BooksDto> implements Serializa
     private long id;
     private String author;
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private String launch_date;
+    private Date launch_date;
     private String title;
     private Double price;
     
@@ -35,11 +36,11 @@ public class BooksDto extends RepresentationModel<BooksDto> implements Serializa
         this.author = author;
     }
     
-    public String getLaunch_date() {
+    public Date getLaunch_date() {
         return launch_date;
     }
     
-    public void setLaunch_date(String launch_date) {
+    public void setLaunch_date(Date launch_date) {
         this.launch_date = launch_date;
     }
     
